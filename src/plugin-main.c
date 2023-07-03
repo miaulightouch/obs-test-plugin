@@ -33,6 +33,7 @@ bool obs_module_load(void)
 	config_t *profile = obs_frontend_get_profile_config();
 	int width = (int)config_get_int(profile, "Video", "BaseCX");
 	int height = (int)config_get_int(profile, "Video", "BaseCY");
+	obs_log(LOG_INFO, "profile resolution: %dx%d", width, height);
 
 	// bug: function not found
 	obs_view_t *view = obs_view_create();
