@@ -35,9 +35,9 @@ bool obs_module_load(void)
 	int height = (int)config_get_int(profile, "Video", "BaseCY");
 
 	// bug: function not found
-	obs_view_t view = obs_view_create();
+	obs_view_t *view = obs_view_create();
 	obs_view_add(view);
-	obs_view_delete(view);
+	obs_view_remove(view);
 
 	return true;
 }
