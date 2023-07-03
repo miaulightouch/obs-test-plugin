@@ -16,8 +16,11 @@ You should have received a copy of the GNU General Public License along
 with this program. If not, see <https://www.gnu.org/licenses/>
 */
 
+#include <obs.h>
 #include <obs-module.h>
 #include <plugin-support.h>
+#include <obs-frontend-api.h>
+#include <util/config-file.h>
 
 OBS_DECLARE_MODULE()
 OBS_MODULE_USE_DEFAULT_LOCALE(PLUGIN_NAME, "en-US")
@@ -26,6 +29,16 @@ bool obs_module_load(void)
 {
 	obs_log(LOG_INFO, "plugin loaded successfully (version %s)",
 		PLUGIN_VERSION);
+	// bug: cannot find config-file.h
+	config_t *profile = obs_frontend_get_profile_config();
+	int width = (int)config_get_int(profile, "Video", "BaseCX");
+	int height = (int)config_get_int(profile, "Video", "BaseCY");
+
+	// bug: function not found
+	obs_view_t view = obs_view_create();
+	obs_view_add(view);
+	obs_view_delete(view);
+
 	return true;
 }
 
